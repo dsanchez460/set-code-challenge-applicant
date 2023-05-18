@@ -25,6 +25,11 @@ describe('Custom package powershell', () => {
   beforeEach(() => {
     cy.loginAsTestUser()
     cy.visit('/')
+    cy.contains('Got it').click()
+  })
+
+  afterEach(() => {
+    cy.resetDemoData()
   })
 
   it('Can create a custom package', () => {
@@ -38,7 +43,8 @@ describe('Custom package powershell', () => {
     )
     createPackagePage.createPackageStep(
       './cypress/resources/hello-world.ps1',
-      '0'
+      '0',
+      true
     )
     createPackagePage.saveButton.click()
     packagesPage.searchBox.click().type(customPackageName)
